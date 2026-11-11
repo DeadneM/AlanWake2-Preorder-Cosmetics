@@ -12,3 +12,10 @@
 - E01: cosmetic access confirmed working by the user.
 - E01b: console hiding added; user confirmed “nickel”.
 - No automatic validation of additional game versions.
+
+## v1.1.0-rc1 (experimental)
+
+- Original d3d12 ASI loader replaces the third-party binary in this prerelease.
+- Skin ASI remains byte-identical to validated E01b.
+- Installation ZIP reduced to four necessary files.
+- Isolated runtime forwarding and ASI initialization checks passed; game validation pending.

@@ -1,0 +1,9 @@
+{
+  "zip_sha256": "cd4e6bb23f08c5a569b78e8f61ad46ba1f3ba433eae49f335e224c51114bdc71",
+  "files": {
+    "d3d12.dll": "1b54f5ac6246e35ba78e6d373d5385615b97c0fa6a2bb42c004cf325c6db47e1",
+    "plugins/AW2PreorderMenu.asi": "b7bb5f1a81b4a937715b009655092c8b756da863b20806e6ea1a5cb92c410b76",
+    "plugins/AW2PreorderMenu.ini": "9ec3610cc0010faf606374718510f9eb8cdd5e956e101201c3ec673928aade7d",
+    "README.txt": "8d4434ded0eeaafbd6064c6cec0bae10752f12fa98b3798a5c1bc816e87dd397"
+  }
+}

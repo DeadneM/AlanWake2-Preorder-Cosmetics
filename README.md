@@ -4,11 +4,15 @@
 
 Makes Saga’s pre-order sweater and Alan’s pre-order revolver skin selectable from the existing **Cosmetics** menu for Deluxe owners.
 
+## Custom loader candidate — v1.1.0-rc1
+
+The skin ASI is unchanged from validated E01b. The new original d3d12 ASI loader has passed isolated forwarding/loading checks but has **not been validated in Alan Wake 2**. Use the prerelease download for this candidate; v1.0.0 remains the stable baseline.
+
 ## Download and install
 
 Download the installable ZIP from [Releases](https://github.com/DeadneM/AlanWake2-Preorder-Cosmetics/releases/latest). Close the game, then extract it directly beside `AlanWake2.exe`.
 
-The package includes Ultimate ASI Loader x64 as `d3d12.dll`, plus `plugins/AW2PreorderMenu.asi` and its INI. If you already use an ASI loader, keep one active loader and install the plugin/INI into its `plugins` folder. Back up conflicting files first. Do not overwrite another graphics proxy without checking compatibility. Preserve your other plugins.
+The candidate package includes this project’s own x64 ASI loader as `d3d12.dll`, plus `plugins/AW2PreorderMenu.asi` and its INI. If you already use an ASI loader, keep one active loader and install the plugin/INI into its `plugins` folder. Back up conflicting files first. Do not overwrite another graphics proxy without checking compatibility. Preserve your other plugins.
 
 Launch normally, then select the sweater and revolver skin in Cosmetics. A debug console created by an existing plugin is hidden by default; its plugin continues to run.
 
@@ -43,10 +47,12 @@ Close the game and remove `plugins/AW2PreorderMenu.asi`. Keep or remove its INI/
 
 ## Build
 
-Use Zig 0.14.1 on Windows, then run `build.ps1`. The output is an x64 ASI; the loader is downloaded separately from its upstream project.
+Use Zig 0.14.1 on Windows, then run `build.ps1` for the ASI and `build-loader.ps1` for the original loader.
+
+The loader forwards the 18 named/ordinal exports of the inspected Windows d3d12.dll to the real System32 DLL. It loads ASIs in the sibling `plugins` and `scripts` folders and calls exported `InitializeASI`. It does not implement all Ultimate ASI Loader options, root-folder ASIs, recursive discovery, DLL chaining, or file overrides.
 
 ## Credits
 
-[Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) by ThirteenAG, MIT license; bundled binary version 10.0.2. Its license is included in releases.
+v1.1.0-rc1 uses an original loader written for this project; no Ultimate ASI Loader binary is included in that package. Earlier v1.0.0 used [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) by ThirteenAG under its MIT license.
 
 Alan Wake 2 and its game assets belong to their respective owners. This is an unofficial mod. Promotional artwork is AI-generated illustration, not an in-game screenshot.
