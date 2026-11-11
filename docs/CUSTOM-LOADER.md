@@ -20,3 +20,11 @@ Rollback locally: restore backups/before-custom-loader/d3d12.dll and its d3d12.i
 References:
 https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-best-practices
 https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-d3d12enableexperimentalfeatures
+
+## RC1 rejected / RC2 correction
+
+User reported startup crash after manual installation. Windows events report 0xc00000fd (stack overflow) in our d3d12.dll at RVA 0x1001 / 0x146c. A local dump inspection shows repeating Epic EOS overlay frames; the cached CreateDevice target is in EOSOVH-Win64-Shipping.dll rather than System32. Skin plugin log reports APPLIED, separating that result from successful game startup.
+
+RC2 resolves runtime exports directly from the trusted System32 module export table instead of using overlay-interceptable GetProcAddress for those targets. It retains GetProcAddress for plugin InitializeASI callbacks. No changes to Epic files/settings or skin ASI.
+
+Regression test: runtime-resolution.c substitutes a failing GetProcAddress shim; all 18 runtime targets still resolve. Isolated ASI initialization, ordinal checks and byte-identical successful root-signature serialization also pass. Actual Epic/game compatibility remains EXPERIMENTAL pending user trial. Stable loader restored locally after RC1 failure; RC2 provided as a ZIP for manual installation.

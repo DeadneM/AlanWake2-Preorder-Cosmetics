@@ -7,6 +7,33 @@ static HMODULE self,system_d3d12;
 static INIT_ONCE runtime_once=INIT_ONCE_STATIC_INIT;
 static FARPROC exports[18];
 static const char *names[]={"SetAppCompatStringPointer","D3D12CreateDevice","D3D12GetDebugInterface","D3D12CoreCreateLayeredDevice","D3D12CoreGetLayeredDeviceSize","D3D12CoreRegisterLayers","D3D12CreateRootSignatureDeserializer","D3D12CreateVersionedRootSignatureDeserializer","D3D12DeviceRemovedExtendedData","D3D12EnableExperimentalFeatures","D3D12GetInterface","D3D12PIXEventsReplaceBlock","D3D12PIXGetThreadInfo","D3D12PIXNotifyWakeFromFenceSignal","D3D12PIXReportCounter","D3D12SerializeRootSignature","D3D12SerializeVersionedRootSignature","GetBehaviorValue"};
+// Resolve the trusted system image directly. Overlay GetProcAddress shims can
+// redirect CreateDevice back through the proxy and produce infinite recursion.
+static FARPROC system_export(HMODULE module,const char *name){
+ unsigned char *base=(unsigned char*)module;
+ IMAGE_DOS_HEADER *dos=(IMAGE_DOS_HEADER*)base;
+ if(dos->e_magic!=IMAGE_DOS_SIGNATURE)return NULL;
+ IMAGE_NT_HEADERS64 *nt=(IMAGE_NT_HEADERS64*)(base+dos->e_lfanew);
+ if(nt->Signature!=IMAGE_NT_SIGNATURE)return NULL;
+ DWORD image_size=nt->OptionalHeader.SizeOfImage;
+ IMAGE_DATA_DIRECTORY dir=nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+ if(!dir.VirtualAddress || dir.VirtualAddress>=image_size || dir.Size>image_size-dir.VirtualAddress)return NULL;
+ IMAGE_EXPORT_DIRECTORY *table=(IMAGE_EXPORT_DIRECTORY*)(base+dir.VirtualAddress);
+ DWORD *name_rvas=(DWORD*)(base+table->AddressOfNames);
+ WORD *ordinals=(WORD*)(base+table->AddressOfNameOrdinals);
+ DWORD *functions=(DWORD*)(base+table->AddressOfFunctions);
+ for(DWORD i=0;i<table->NumberOfNames;i++){
+  if(name_rvas[i]>=image_size)return NULL;
+  if(lstrcmpA((const char*)base+name_rvas[i],name))continue;
+  if(ordinals[i]>=table->NumberOfFunctions)return NULL;
+  DWORD rva=functions[ordinals[i]];
+  if(!rva || rva>=image_size)return NULL;
+  // The inspected system d3d12 has direct exports. Refuse unknown forwarders.
+  if(rva>=dir.VirtualAddress && rva-dir.VirtualAddress<dir.Size)return NULL;
+  return (FARPROC)(base+rva);
+ }
+ return NULL;
+}
 static BOOL CALLBACK load_runtime(PINIT_ONCE once,PVOID param,PVOID *context){
  (void)once;(void)param;(void)context;
  wchar_t path[MAX_PATH];UINT n=GetSystemDirectoryW(path,MAX_PATH);
@@ -14,7 +41,7 @@ static BOOL CALLBACK load_runtime(PINIT_ONCE once,PVOID param,PVOID *context){
  lstrcatW(path,L"\\d3d12.dll");
  system_d3d12=LoadLibraryExW(path,NULL,LOAD_LIBRARY_SEARCH_SYSTEM32);
  if(!system_d3d12 || system_d3d12==self)return FALSE;
- for(unsigned i=0;i<18;i++)exports[i]=GetProcAddress(system_d3d12,names[i]);
+ for(unsigned i=0;i<18;i++)exports[i]=system_export(system_d3d12,names[i]);
  return TRUE;
 }
 // Called only by exported function stubs, never from DllMain.

@@ -19,3 +19,9 @@
 - Skin ASI remains byte-identical to validated E01b.
 - Installation ZIP reduced to four necessary files.
 - Isolated runtime forwarding and ASI initialization checks passed; game validation pending.
+
+## v1.1.0-rc2 (experimental)
+- RC1 REJECTED: startup crash with Epic overlay, stack overflow confirmed from Windows report/dump.
+- Resolve System32 runtime exports directly to avoid intercepted lookup recursion.
+- Regression test simulates intercepted GetProcAddress; isolated forwarding tests pass.
+- Skin ASI unchanged. Game test pending; validated loader restored locally.

@@ -1,18 +1,18 @@
-# Alan Wake 2 â€” Pre-order Cosmetics
+# Alan Wake 2 — Pre-order Cosmetics
 
 ![Mod cover](assets/nexus-cover.png)
 
-Makes Sagaâ€™s pre-order sweater and Alanâ€™s pre-order revolver skin selectable from the existing **Cosmetics** menu for Deluxe owners.
+Makes Saga’s pre-order sweater and Alan’s pre-order revolver skin selectable from the existing **Cosmetics** menu for Deluxe owners.
 
-## Custom loader candidate â€” v1.1.0-rc1
+## Custom loader candidate — v1.1.0-rc2
 
-The skin ASI is unchanged from validated E01b. The new original d3d12 ASI loader has passed isolated forwarding/loading checks but has **not been validated in Alan Wake 2**. Use the prerelease download for this candidate; v1.0.0 remains the stable baseline.
+RC1 was rejected after an Epic-launch crash. RC2 corrects runtime export resolution; game validation remains pending. The skin ASI is unchanged from validated E01b. The new original d3d12 ASI loader has passed isolated forwarding/loading checks but has **not been validated in Alan Wake 2**. Use the prerelease download for this candidate; v1.0.0 remains the stable baseline.
 
 ## Download and install
 
 Download the installable ZIP from [Releases](https://github.com/DeadneM/AlanWake2-Preorder-Cosmetics/releases/latest). Close the game, then extract it directly beside `AlanWake2.exe`.
 
-The candidate package includes this projectâ€™s own x64 ASI loader as `d3d12.dll`, plus `plugins/AW2PreorderMenu.asi` and its INI. If you already use an ASI loader, keep one active loader and install the plugin/INI into its `plugins` folder. Back up conflicting files first. Do not overwrite another graphics proxy without checking compatibility. Preserve your other plugins.
+The candidate package includes this project’s own x64 ASI loader as `d3d12.dll`, plus `plugins/AW2PreorderMenu.asi` and its INI. If you already use an ASI loader, keep one active loader and install the plugin/INI into its `plugins` folder. Back up conflicting files first. Do not overwrite another graphics proxy without checking compatibility. Preserve your other plugins.
 
 Launch normally, then select the sweater and revolver skin in Cosmetics. A debug console created by an existing plugin is hidden by default; its plugin continues to run.
 
@@ -21,7 +21,7 @@ Launch normally, then select the sweater and revolver skin in Cosmetics. A debug
 - Windows x64, Alan Wake 2 PC, Deluxe ownership.
 - Target executable version **0.564.904.9**.
 - Executable SHA256: `09135F128C07CFA4598B22DD4754A98B2C1F4FF816BFCB1E336ECFB4462B4163`.
-- E01 cosmetics access and E01b console hiding were confirmed working by the project owner. This is one installationâ€™s validation, not a compatibility guarantee for other game builds.
+- E01 cosmetics access and E01b console hiding were confirmed working by the project owner. This is one installation’s validation, not a compatibility guarantee for other game builds.
 
 ## Settings
 
@@ -53,6 +53,6 @@ The loader forwards the 18 named/ordinal exports of the inspected Windows d3d12.
 
 ## Credits
 
-v1.1.0-rc1 uses an original loader written for this project; no Ultimate ASI Loader binary is included in that package. Earlier v1.0.0 used [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) by ThirteenAG under its MIT license.
+v1.1.0-rc2 uses an original loader written for this project; no Ultimate ASI Loader binary is included in that package. Earlier v1.0.0 used [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) by ThirteenAG under its MIT license.
 
 Alan Wake 2 and its game assets belong to their respective owners. This is an unofficial mod. Promotional artwork is AI-generated illustration, not an in-game screenshot.
