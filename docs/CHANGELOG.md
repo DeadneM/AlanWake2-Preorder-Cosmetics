@@ -29,3 +29,8 @@
 
 ## Stable v1.1.0 - 2026-11-12
 User explicitly confirmed RC2 tested and validated and authorized stable publication. Same loader and ASI bytes. One tested Epic installation; executable 0.564.904.9.
+
+
+## Nexus publication - 2026-11-12
+Published v1.1.0 on Nexus Mods as xDeYuSx: https://www.nexusmods.com/alanwake2/mods/96
+Main file version 1.1.0, 166.1 KB. Cover, header banner, installation/settings/uninstall description, GitHub link and AI disclosures included. Same ZIP as stable GitHub release.

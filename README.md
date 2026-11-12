@@ -8,6 +8,8 @@ Makes Saga’s pre-order sweater and Alan’s pre-order revolver skin selectable
 
 RC2 explicitly tested and validated by the project owner: successful startup, working cosmetics and hidden console. The release retains identical RC2 loader and E01b ASI bytes. RC1 remains rejected.
 
+[Nexus Mods page](https://www.nexusmods.com/alanwake2/mods/96) · [Stable GitHub release](https://github.com/DeadneM/AlanWake2-Preorder-Cosmetics/releases/tag/v1.1.0)
+
 ## Download and install
 
 Download the installable ZIP from [Releases](https://github.com/DeadneM/AlanWake2-Preorder-Cosmetics/releases/latest). Close the game, then extract it directly beside `AlanWake2.exe`.
