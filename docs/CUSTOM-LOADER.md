@@ -28,3 +28,7 @@ User reported startup crash after manual installation. Windows events report 0xc
 RC2 resolves runtime exports directly from the trusted System32 module export table instead of using overlay-interceptable GetProcAddress for those targets. It retains GetProcAddress for plugin InitializeASI callbacks. No changes to Epic files/settings or skin ASI.
 
 Regression test: runtime-resolution.c substitutes a failing GetProcAddress shim; all 18 runtime targets still resolve. Isolated ASI initialization, ordinal checks and byte-identical successful root-signature serialization also pass. Actual Epic/game compatibility remains EXPERIMENTAL pending user trial. Stable loader restored locally after RC1 failure; RC2 provided as a ZIP for manual installation.
+
+
+## Stable v1.1.0 - 2026-11-12
+User explicitly confirmed RC2 tested and validated and authorized stable publication. Same loader and ASI bytes. One tested Epic installation; executable 0.564.904.9.

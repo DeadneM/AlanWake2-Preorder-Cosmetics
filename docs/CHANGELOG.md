@@ -25,3 +25,7 @@
 - Resolve System32 runtime exports directly to avoid intercepted lookup recursion.
 - Regression test simulates intercepted GetProcAddress; isolated forwarding tests pass.
 - Skin ASI unchanged. Game test pending; validated loader restored locally.
+
+
+## Stable v1.1.0 - 2026-11-12
+User explicitly confirmed RC2 tested and validated and authorized stable publication. Same loader and ASI bytes. One tested Epic installation; executable 0.564.904.9.

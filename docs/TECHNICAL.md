@@ -14,3 +14,7 @@ The plugin checks PE timestamp/size, constructor anchors and strings, validates 
 Construction checked with Zig 0.14.1, Windows x64, warnings treated as errors. DLL loading/export and unsupported-host refusal were checked outside the game. User then confirmed E01 cosmetic functionality and E01b console hiding. No claim of wider compatibility.
 
 Reverting the ASI to E01 restores the pre-console-change build; removing the ASI and restarting reverts the descriptor changes.
+
+
+## Stable v1.1.0 - 2026-11-12
+User explicitly confirmed RC2 tested and validated and authorized stable publication. Same loader and ASI bytes. One tested Epic installation; executable 0.564.904.9.
